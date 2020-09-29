@@ -6,14 +6,14 @@
 #    By: vmutteri <vmutteri@student.21-schoo>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/28 10:14:47 by vmutteri          #+#    #+#              #
-#    Updated: 2020/09/29 14:02:42 by vmutteri         ###   ########.fr        #
+#    Updated: 2020/09/29 14:23:01 by vmutteri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	=	ft_cat
-SRCS	=	ft_cat.c ft_ft.c
+NAME	=	ft_tail
+SRCS	=	ft_tail.c ft_ft.c
 OBJS	=	${SRCS:.c=.o}
-OPTION	=	-I ${HEADER}
+OPTION	=	-I${HEADER}
 HEADER	=	ft.h
 RM		=	rm -f
 CC		=	gcc

@@ -28,18 +28,68 @@ void	ft_putstr(char *str)
 
 void	ft_print_error(int en, char *argv)
 {
-	ft_putstr("cat: ");
+	ft_putstr("tail: ");
 	ft_putstr(basename(argv));
 	ft_putstr(": ");
 	ft_putstr(strerror(en));
 }
 
-void	ft_display_file(int fd)
+void	ft_display_file(int fd, int nb, char *argv)
 {
 	int		ret;
 	char	buf[BUFF_SIZE + 1];
+	char	*buf_print;
+	int		file_len;
 
-	ret = read(fd, buf, BUFF_SIZE + 1);
-	buf[ret] = '\0';
+	file_len = 0;
+	while (ret = read(fd, buf, BUFF_SIZE + 1))
+		file_len++;
+	buf_print = malloc(nb * 4);
+	ft_putstr("==> ");
+	ft_putstr(basename(argv));
+	ft_putstr(" <==");
+	ft_putchar('\n');
+	
+	
 	ft_putstr(buf);
+	
+	
+	ft_putchar('\n');
 }
+
+int	ft_char_to_nb(char *str)
+{
+	int nb;
+	
+	nb = 0;
+	while (*str)
+	{
+		if ((*str >= '0' && *str <= '9'))
+		{
+			while (*str >= '0' && *str <= '9')
+			{
+				nb = (nb * 10) + (*str - '0');
+				str++;
+			}
+			return (nb);
+		}
+		str++;
+	}
+	return (0);
+}
+
+/*int		ft_file_size(char *argv)
+{
+	int		fd;
+	int		f_len;
+	int		ret
+	char	buf[BUFF_SIZE+1]
+
+	fd = open(argv[i], O_RDONLY);
+	if (fd == -1)
+		return (0);
+	while (ret = read(fd, buf, BUFF_SIZE + 1))
+		f_len++;
+	close(fd);
+	return (f_len);
+}*/
