@@ -6,12 +6,12 @@
 #    By: vmutteri <vmutteri@student.21-schoo>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/28 10:14:47 by vmutteri          #+#    #+#              #
-#    Updated: 2020/09/29 14:23:01 by vmutteri         ###   ########.fr        #
+#    Updated: 2020/09/29 21:21:25 by vmutteri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	ft_tail
-SRCS	=	ft_tail.c ft_ft.c
+SRCS	=	ft_tail.c ft_ft.c ft_str.c
 OBJS	=	${SRCS:.c=.o}
 OPTION	=	-I${HEADER}
 HEADER	=	ft.h

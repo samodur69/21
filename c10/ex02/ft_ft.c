@@ -6,25 +6,11 @@
 /*   By: vmutteri <vmutteri@student.21-schoo>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 19:59:39 by vmutteri          #+#    #+#             */
-/*   Updated: 2020/09/29 14:15:12 by vmutteri         ###   ########.fr       */
+/*   Updated: 2020/09/29 21:22:20 by vmutteri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <string.h>
-#include <libgen.h>
-#define BUFF_SIZE 30000
-
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
-void	ft_putstr(char *str)
-{
-	while (*str)
-		write(1, str++, 1);
-}
+#include "ft.h"
 
 void	ft_print_error(int en, char *argv)
 {
@@ -34,33 +20,32 @@ void	ft_print_error(int en, char *argv)
 	ft_putstr(strerror(en));
 }
 
-void	ft_display_file(int fd, int nb, char *argv)
+void	ft_display_file(int fd, int f_len, int arr_len, char *argv)
 {
 	int		ret;
-	char	buf[BUFF_SIZE + 1];
-	char	*buf_print;
-	int		file_len;
+	int		i;
+	char	*buf;
 
-	file_len = 0;
-	while (ret = read(fd, buf, BUFF_SIZE + 1))
-		file_len++;
-	buf_print = malloc(nb * 4);
+	buf = malloc((f_len + 1) * 4);
+	ret = read(fd, buf, (f_len));
+	buf[ret] = '\0';
 	ft_putstr("==> ");
 	ft_putstr(basename(argv));
 	ft_putstr(" <==");
 	ft_putchar('\n');
-	
-	
-	ft_putstr(buf);
-	
-	
+	i = f_len - arr_len;
+	while (i < f_len)
+	{
+		write(1, &buf[i], 1);
+		i++;
+	}
 	ft_putchar('\n');
 }
 
-int	ft_char_to_nb(char *str)
+int		ft_char_to_nb(char *str)
 {
 	int nb;
-	
+
 	nb = 0;
 	while (*str)
 	{
@@ -78,18 +63,19 @@ int	ft_char_to_nb(char *str)
 	return (0);
 }
 
-/*int		ft_file_size(char *argv)
+int		ft_file_size(char *argv)
 {
 	int		fd;
 	int		f_len;
-	int		ret
-	char	buf[BUFF_SIZE+1]
+	int		ret;
+	char	buf;
 
-	fd = open(argv[i], O_RDONLY);
+	f_len = 0;
+	fd = open(argv, O_RDONLY);
 	if (fd == -1)
 		return (0);
-	while (ret = read(fd, buf, BUFF_SIZE + 1))
+	while ((ret = read(fd, &buf, 1)) != '\0')
 		f_len++;
 	close(fd);
 	return (f_len);
-}*/
+}
