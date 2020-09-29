@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cat.c                                           :+:      :+:    :+:   */
+/*   ft.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vmutteri <vmutteri@student.21-schoo>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/29 12:59:57 by vmutteri          #+#    #+#             */
-/*   Updated: 2020/09/29 14:04:47 by vmutteri         ###   ########.fr       */
+/*   Created: 2020/09/29 13:59:19 by vmutteri          #+#    #+#             */
+/*   Updated: 2020/09/29 14:01:34 by vmutteri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft.h"
+#ifndef FT_H
+# define FT_H
 
-int		main(int argc, char **argv)
-{
-	int i;
-	int fd;
+# include <fcntl.h>
+# include <unistd.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <errno.h>
+# include <string.h>
+# include <libgen.h>
 
-	i = 1;
-	if (argc < 1)
-		return (0);
-	while (i < argc)
-	{
-		fd = open(argv[i], O_RDONLY);
-		if (fd == -1)
-		{
-			ft_print_error(errno, argv[i]);
-			ft_putchar('\n');
-		}
-		else
-			ft_display_file(fd);
-		close(fd);
-		i++;
-	}
-	return (0);
-}
+# define BUFF_SIZE 30000
+
+void	ft_putstr(char *str);
+void	ft_putchar(char c);
+void	ft_display_file(int fd);
+void	ft_print_error(int en, char *argv);
+
+#endif

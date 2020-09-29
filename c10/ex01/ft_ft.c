@@ -6,11 +6,14 @@
 /*   By: vmutteri <vmutteri@student.21-schoo>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 19:59:39 by vmutteri          #+#    #+#             */
-/*   Updated: 2020/09/28 19:59:47 by vmutteri         ###   ########.fr       */
+/*   Updated: 2020/09/29 14:05:23 by vmutteri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <string.h>
+#include <libgen.h>
+#define BUFF_SIZE 30000
 
 void	ft_putchar(char c)
 {
@@ -23,37 +26,20 @@ void	ft_putstr(char *str)
 		write(1, str++, 1);
 }
 
-void	ft_putnbr(int nb)
+void	ft_print_error(int en, char *argv)
 {
-	if (nb == -2147483648)
-	{
-		ft_putchar('-');
-		ft_putchar('2');
-		ft_putnbr(147483648);
-	}
-	else
-	{
-		if (nb < 0)
-		{
-			ft_putchar('-');
-			nb = nb * -1;
-		}
-		if (nb / 10)
-			ft_putnbr(nb / 10);
-		ft_putchar(nb % 10 + '0');
-	}
+	ft_putstr("ft_cat: ");
+	ft_putstr(basename(argv));
+	ft_putstr(": ");
+	ft_putstr(strerror(en));
 }
 
-int	ft_strcmp(char *s1, char *s2)
+void	ft_display_file(int fd)
 {
-	int i;
+	int		ret;
+	char	buf[BUFF_SIZE + 1];
 
-	i = 0;
-	while (s1[i] != '\0')
-	{
-		if (!(s1[i] == s2[i]))
-			return (s1[i] - s2[i]);
-		i++;
-	}
-	return (1);
+	ret = read(fd, buf, BUFF_SIZE + 1);
+	buf[ret] = '\0';
+	ft_putstr(buf);
 }
