@@ -1,42 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tail.c                                          :+:      :+:    :+:   */
+/*   ft_is_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vmutteri <vmutteri@student.21-schoo>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/29 14:21:57 by vmutteri          #+#    #+#             */
-/*   Updated: 2020/09/29 21:13:41 by vmutteri         ###   ########.fr       */
+/*   Created: 2020/09/30 16:26:53 by vmutteri          #+#    #+#             */
+/*   Updated: 2020/09/30 22:07:46 by vmutteri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft.h"
-
-int		main(int argc, char **argv)
+int		ft_is_sort(int *tab, int length, int (*f)(int, int))
 {
 	int i;
-	int fd;
-	int t_len;
-	int	f_len;
+	int b;
+	int m;
 
-	f_len = 0;
-	t_len = ft_atoi(argv[2]);
-	if (argc < 2 || t_len <= 0)
+	i = 1;
+	b = 1;
+	m = 1;
+	if (length == 1)
 		return (1);
-	i = 3;
-	while (i < argc)
+	while (i < length)
 	{
-		f_len = ft_file_size(argv[i]);
-		fd = open(argv[i], O_RDONLY);
-		if (fd == -1)
-		{
-			ft_print_error(errno, argv[i]);
-			ft_putchar('\n');
-		}
-		else
-			ft_display_file(fd, f_len, t_len, argv[i]);
-		close(fd);
+		if (f(tab[i - 1], tab[i]) <= 0)
+			b++;
+		if (f(tab[i - 1], tab[i]) >= 0)
+			m++;
 		i++;
 	}
-	return (0);
+	if (b == length || m == length)
+		return (1);
+	else
+		return (0);
 }

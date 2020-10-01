@@ -1,36 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft.h                                               :+:      :+:    :+:   */
+/*   ft_h.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vmutteri <vmutteri@student.21-schoo>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/29 13:59:19 by vmutteri          #+#    #+#             */
-/*   Updated: 2020/09/29 21:45:03 by vmutteri         ###   ########.fr       */
+/*   Created: 2020/09/30 16:36:52 by vmutteri          #+#    #+#             */
+/*   Updated: 2020/09/30 23:20:49 by vmutteri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_H
-# define FT_H
+#ifndef FT_H_H
+# define FT_H_H
 
-# include <fcntl.h>
 # include <unistd.h>
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <errno.h>
-# include <string.h>
-# include <libgen.h>
-# include <stdlib.h>
-
-# define BUFF_SIZE 30000
 
 void	ft_putstr(char *str);
 void	ft_putchar(char c);
-void	ft_display_file(int fd, int f_len, int t_len, char *argv);
-void	ft_print_error(int en, char *argv);
-int		ft_strlen(char *str);
-int		ft_char_to_nb(char *str);
-int		ft_file_size(char *argv);
+void	ft_putnbr(int nb);
 int		ft_atoi(char *str);
-
+int		ft_div(int a, int b);
+int		ft_plus(int a, int b);
+int		ft_minus(int a, int b);
+int		ft_multiply(int a, int b);
+int		ft_modulo(int a, int b);
+int		ft_check_div(int b, int (*f)(int, int));
+void	*ft_check_operator(char *str);
 #endif

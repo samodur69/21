@@ -1,42 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tail.c                                          :+:      :+:    :+:   */
+/*   ft_count_if.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vmutteri <vmutteri@student.21-schoo>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/29 14:21:57 by vmutteri          #+#    #+#             */
-/*   Updated: 2020/09/29 21:13:41 by vmutteri         ###   ########.fr       */
+/*   Created: 2020/09/30 16:12:40 by vmutteri          #+#    #+#             */
+/*   Updated: 2020/09/30 17:28:59 by vmutteri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft.h"
-
-int		main(int argc, char **argv)
+int		ft_count_if(char **tab, int length, int (*f)(char*))
 {
 	int i;
-	int fd;
-	int t_len;
-	int	f_len;
+	int count;
 
-	f_len = 0;
-	t_len = ft_atoi(argv[2]);
-	if (argc < 2 || t_len <= 0)
-		return (1);
-	i = 3;
-	while (i < argc)
+	i = 0;
+	count = 0;
+	while (i < length)
 	{
-		f_len = ft_file_size(argv[i]);
-		fd = open(argv[i], O_RDONLY);
-		if (fd == -1)
-		{
-			ft_print_error(errno, argv[i]);
-			ft_putchar('\n');
-		}
-		else
-			ft_display_file(fd, f_len, t_len, argv[i]);
-		close(fd);
+		if (f(tab[i]) != 0)
+			count++;
 		i++;
 	}
-	return (0);
+	return (count);
 }

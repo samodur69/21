@@ -42,10 +42,12 @@ void	ft_display_file(int fd, int f_len, int arr_len, char *argv)
 	ft_putchar('\n');
 }
 
-int		ft_char_to_nb(char *str)
+int		ft_atoi(char *str)
 {
 	int nb;
+	int znak;
 
+	znak = 1;
 	nb = 0;
 	while (*str)
 	{
@@ -56,8 +58,10 @@ int		ft_char_to_nb(char *str)
 				nb = (nb * 10) + (*str - '0');
 				str++;
 			}
-			return (nb);
+			return (znak * nb);
 		}
+		else if (*str == '-')
+			znak *= (-1);
 		str++;
 	}
 	return (0);
